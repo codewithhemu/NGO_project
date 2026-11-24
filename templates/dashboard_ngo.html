@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card bg-primary text-white shadow-sm border-0">
+            <div class="card-body p-4 d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mb-0">🏢 Welcome, Admin!</h2>
+                    <p class="mb-0 mt-1">Manage your community requests and donations here.</p>
+                </div>
+                <a href="/logout" class="btn btn-light text-danger fw-bold">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- ADD NEW REQUEST FORM -->
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-white border-bottom-0 pt-4 pb-0">
+                <h4 class="fw-bold">➕ Create New Request</h4>
+            </div>
+            <div class="card-body p-4">
+                <form action="/add" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label text-muted">Item Name</label>
+                        <input type="text" class="form-control" name="item_name" placeholder="e.g., Rice Bags, Medical Kits" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label text-muted">Quantity Needed</label>
+                        <input type="number" class="form-control" name="quantity" min="1" placeholder="e.g., 50" required>
+                    </div>
+                    <button type="submit" class="btn w-100 text-white fw-bold" style="background-color: #f2994a;">Post Request</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- DATA TABLES & STATS -->
+    <div class="col-md-8 mb-4">
+        <div class="row">
+            <div class="col-sm-6 mb-3">
+                <div class="card border-0 shadow-sm border-start border-warning border-4 h-100">
+                    <div class="card-body">
+                        <p class="text-muted mb-1 small text-uppercase fw-bold">Active Requests</p>
+                        <h2 class="mb-0 text-warning fw-bold">{{ pending_count }}</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <div class="card border-0 shadow-sm border-start border-success border-4 h-100">
+                    <div class="card-body">
+                        <p class="text-muted mb-1 small text-uppercase fw-bold">Fulfilled</p>
+                        <h2 class="mb-0 text-success fw-bold">{{ fulfilled_count }}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- TABLE 1: LIVE TRACKING TABLE WITH PROGRESS BARS & DELETE -->
+        <div class="card border-0 shadow-sm mt-2">
+            <div class="card-header bg-white border-bottom pt-3 pb-2">
+                <h5 class="fw-bold mb-0">📋 Your Live Requests</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4">Item Name</th>
+                                <th style="width: 35%;">Progress</th>
+                                <th>Status</th>
+                                <th class="text-end pe-4">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in items %}
+                            {% set total = item[5] if item[5] else item[2] %}
+                            {% set donated = total - item[2] %}
+                            {% set percent = ((donated / total) * 100)|round|int if total > 0 else 100 %}
+                            <tr>
+                                <td class="ps-4 fw-bold">{{ item[1] }}</td>
+                                <td>
+                                    <div class="d-flex justify-content-between small text-muted mb-1">
+                                        <span>{{ donated }} / {{ total }} funded</span>
+                                        <span>{{ percent }}%</span>
+                                    </div>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: {{ percent }}%;"></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    {% if item[3] == 'Pending' %}
+                                        <span class="badge bg-warning text-dark">Pending</span>
+                                    {% else %}
+                                        <span class="badge bg-success">Fulfilled</span>
+                                    {% endif %}
+                                </td>
+                                <td class="text-end pe-4">
+                                    <form action="/delete/{{ item[0] }}" method="POST" style="display:inline;">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this request?');">🗑️ Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="4" class="text-center py-4 text-muted">No requests made yet. Add one on the left!</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TABLE 2: RECENT DONOR CONTRIBUTIONS WITH PDF REPORT DOWNLOAD -->
+        <div class="card border-0 shadow-sm mt-4 border-start border-primary border-4">
+            <div class="card-header bg-white border-bottom pt-3 pb-2 d-flex flex-wrap justify-content-between align-items-center gap-2">
+                <h5 class="fw-bold mb-0 text-primary">🎁 Recent Donor Contributions</h5>
+                <form action="/export/pdf" method="GET" class="d-flex align-items-center gap-2">
+                    <select name="period" class="form-select form-select-sm" style="width: auto;">
+                        <option value="all">All Time</option>
+                        <option value="week">Last 1 Week</option>
+                        <option value="month">Last 1 Month</option>
+                        <option value="year">Last 1 Year</option>
+                    </select>
+                    <button type="submit" class="btn btn-sm btn-danger fw-bold text-nowrap">📄 Download Donation Report</button>
+                </form>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4">Donor Email</th>
+                                <th>Item Donated</th>
+                                <th>Quantity</th>
+                                <th>Date & Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for contribution in contributions %}
+                            <tr>
+                                <td class="ps-4 text-muted">{{ contribution[0] }}</td>
+                                <td class="fw-bold">{{ contribution[1] }}</td>
+                                <td class="text-success fw-bold">+{{ contribution[2] }}</td>
+                                <td class="text-muted small">{{ contribution[3] }}</td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="4" class="text-center py-4 text-muted">No contributions received yet.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <div class="card shadow border-0">
+            <div class="card-header text-white text-center py-4"
+                style="background: linear-gradient(to right, #f2994a, #f2c94c);">
+                <h3 class="mb-0">🏢 NGO Admin Login</h3>
+                <p class="mb-0 small">Secure organizational access</p>
+            </div>
+            <div class="card-body p-4">
+                <form action="#" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Organization Email</label>
+                        <input type="email" class="form-control" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password" required>
+                    </div>
+                    <button type="submit" class="btn w-100 py-2 text-white" style="background-color: #f2994a;">Admin
+                        Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

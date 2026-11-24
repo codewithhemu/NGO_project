@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- FULL-WIDTH PHOTO HERO BANNER -->
+<div class="p-5 mb-5 text-white rounded-4 shadow position-relative overflow-hidden"
+    style="background: linear-gradient(135deg, rgba(15, 81, 50, 0.88), rgba(11, 59, 36, 0.78)), 
+            url('https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;">
+    <div class="py-4 text-center">
+        <span class="badge bg-warning text-dark px-3 py-2 rounded-pill mb-3 fw-semibold">
+            🤝 Direct Community Support
+        </span>
+        <h1 class="display-4 fw-bold mb-3">Small Acts, Big Impact.</h1>
+        <p class="lead mb-4 mx-auto text-white-75" style="max-width: 680px;">
+            See real-time essential needs posted directly by our local NGO. Contribute any quantity you can and track
+            every single item you donate.
+        </p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="/register" class="btn btn-warm btn-lg px-5 py-3 fw-bold shadow">
+                ❤️ Register to Donate
+            </a>
+            <a href="/login/donor" class="btn btn-outline-light btn-lg px-4 py-3 fw-semibold">
+                Donor Sign In
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- 4 STATISTIC CARDS -->
+<div class="row text-center mb-5 g-3">
+    <div class="col-md-3 col-6">
+        <div class="card border-0 shadow-sm ngo-card py-3 h-100">
+            <div class="card-body">
+                <h2 class="text-emerald fw-bold mb-0">📦 1,200+</h2>
+                <p class="text-muted small mb-0 mt-2">Essentials Delivered</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <div class="card border-0 shadow-sm ngo-card py-3 h-100">
+            <div class="card-body">
+                <h2 class="text-success fw-bold mb-0">🤝 450+</h2>
+                <p class="text-muted small mb-0 mt-2">Needs Fulfilled</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <div class="card border-0 shadow-sm ngo-card py-3 h-100">
+            <div class="card-body">
+                <h2 class="fw-bold mb-0" style="color: #e67e22;">💛 300+</h2>
+                <p class="text-muted small mb-0 mt-2">Community Donors</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <div class="card border-0 shadow-sm ngo-card py-3 h-100">
+            <div class="card-body">
+                <h2 class="text-danger fw-bold mb-0">✅ 100%</h2>
+                <p class="text-muted small mb-0 mt-2">Direct Transparency</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- HOW IT WORKS (3-STEP TRANSPARENCY STRIP) -->
+<div class="bg-emerald-soft rounded-4 p-4 p-md-5 mb-5">
+    <div class="text-center mb-4">
+        <h3 class="fw-bold text-emerald mb-1">How Your Donation Helps</h3>
+        <p class="text-muted mb-0">Simple, transparent, and directly tracked from you to the NGO.</p>
+    </div>
+    <div class="row text-center g-4">
+        <div class="col-md-4">
+            <div class="bg-white rounded-4 p-4 shadow-sm h-100">
+                <div class="fs-1 mb-2">📋</div>
+                <h5 class="fw-bold text-emerald">1. Verified NGO Needs</h5>
+                <p class="text-muted small mb-0">The NGO posts exact item quantities needed—from rice bags to medical
+                    kits.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="bg-white rounded-4 p-4 shadow-sm h-100">
+                <div class="fs-1 mb-2">🎁</div>
+                <h5 class="fw-bold text-emerald">2. Donate Any Quantity</h5>
+                <p class="text-muted small mb-0">Give full or partial quantities. Every contribution immediately updates
+                    the live progress bar.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="bg-white rounded-4 p-4 shadow-sm h-100">
+                <div class="fs-1 mb-2">🌟</div>
+                <h5 class="fw-bold text-emerald">3. Track Live Impact</h5>
+                <p class="text-muted small mb-0">Every donation is logged with a timestamp in both your Impact History
+                    and the NGO ledger.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CATEGORIES GRID -->
+<div class="text-center mb-4">
+    <h3 class="fw-bold text-emerald mb-1">Essential Categories We Support</h3>
+    <p class="text-muted">Targeted supplies that make an immediate difference every day.</p>
+</div>
+<div class="row text-center g-4 mb-5">
+    <div class="col-md-3 col-sm-6">
+        <div class="card shadow-sm h-100 border-0 ngo-card pt-4 pb-2">
+            <h1 class="display-4">🍱</h1>
+            <div class="card-body">
+                <h5 class="card-title fw-bold text-emerald">Food & Rations</h5>
+                <p class="card-text text-muted small">Rice, grains, groceries, and daily nutrition.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="card shadow-sm h-100 border-0 ngo-card pt-4 pb-2">
+            <h1 class="display-4">💊</h1>
+            <div class="card-body">
+                <h5 class="card-title fw-bold text-emerald">Medical Supplies</h5>
+                <p class="card-text text-muted small">First aid kits, essential medicines, and hygiene.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="card shadow-sm h-100 border-0 ngo-card pt-4 pb-2">
+            <h1 class="display-4">🧥</h1>
+            <div class="card-body">
+                <h5 class="card-title fw-bold text-emerald">Clothing & Blankets</h5>
+                <p class="card-text text-muted small">Warm blankets, winter wear, and daily clothing.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="card shadow-sm h-100 border-0 ngo-card pt-4 pb-2">
+            <h1 class="display-4">📚</h1>
+            <div class="card-body">
+                <h5 class="card-title fw-bold text-emerald">Education</h5>
+                <p class="card-text text-muted small">Notebooks, school bags, and stationery kits.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TRUST / MISSION BANNER -->
+<div class="card border-0 shadow-sm rounded-4 mb-4 text-center p-4 bg-white border-start border-success border-5">
+    <div class="card-body">
+        <h5 class="fw-bold text-emerald mb-2">🛡️ 100% Direct Item-to-NGO Tracking — No Middlemen</h5>
+        <p class="text-muted small mb-0">
+            Every request is verified by our NGO administrator and every donor contribution is permanently recorded for
+            complete accountability.
+        </p>
+    </div>
+</div>
+{% endblock %}
